@@ -1,0 +1,56 @@
+.scan{
+    background: #393939;
+    height:100vh;
+    width:100vw;
+    display:flex;
+    align-items: flex-end;
+}
+.scan h2{
+    margin: 0;
+}
+.scan_container{
+    width: 100%;
+    height: 98vh;
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.cedula_posterior{
+    width: 400px;
+    height: 140px;
+    border-radius: 4px;
+    border: 2px solid #5fddbf;
+}
+.cedula_posterior figure{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cedula_posterior figure, .cedula_posterior figure img{
+    height:90%;
+    object-fit: cover;
+}
+.scan_container-title{
+    
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #004777;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.scan_container-relative{
+    position: relative;
+    margin: 20px 0;
+
+}
+.scan_container-absolute{
+    position: absolute;
+    width: 400px;
+    height: 140px;
+    opacity: 0;
+}
