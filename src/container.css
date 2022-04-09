@@ -82,3 +82,29 @@
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
 }
+.UpIdk{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #004777;
+    z-index: 3890132809132809132809132809132809;
+}
+.none{
+    display: none;
+}
+
+@media(max-width:768px){
+    .andes_img img{
+        width: 110px;
+    }
+    .cedula_posterior{
+        width: 270px;
+    }
+}
+@media(max-width:320px){
+.scan{
+        overflow-x: hidden;
+}
+}
