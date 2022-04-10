@@ -6,7 +6,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 let image_andes = require('../andes.png');
 
-function Scan() {
+function Scan({
+    setUseCamera,
+    image,
+    setImage,
+    setImagenTrasera,
+    imageTrasera,
+}) {
     let { id } = useParams();
     let { type } = useParams();
     let nameCaptureDocument;
@@ -56,7 +62,13 @@ function Scan() {
                     <img src={image_andes} alt="" />
                 </figure>
                 <h3 className="scan_container-title">{nameCaptureDocument}</h3>
-                <Cards />
+                <Cards
+                    setUseCamera={setUseCamera}
+                    image={image}
+                    setImage={setImage}
+                    setImagenTrasera={setImagenTrasera}
+                    imageTrasera={imageTrasera}
+                />
             </article>
         );
     } else if (type === 'PAS') {

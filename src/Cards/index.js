@@ -2,12 +2,14 @@ import React from 'react';
 import { Delantera } from '../Delantera';
 import { Trasera } from '../Trasera';
 import axios from 'axios';
-let cedula_trasera = require('../card2.png');
-let cedula_delantera = require('../card1.png');
 
-function Cards() {
-    const [image, setImage] = React.useState(cedula_delantera);
-    const [imageTrasera, setImagenTrasera] = React.useState(cedula_trasera);
+function Cards({
+    setUseCamera,
+    setImage,
+    image,
+    setImagenTrasera,
+    imageTrasera,
+}) {
     const [uploadImage, setUploadImage] = React.useState(false);
     const [uploadImageOne, setUploadImageTwo] = React.useState(false);
     const [visibility, setVisibility] = React.useState('open_camera-none');
@@ -67,7 +69,7 @@ function Cards() {
                     }}
                     className="scan_container-absolute"
                 ></input> */}
-                <Delantera img={image} />
+                <Delantera img={image} setUseCamera={setUseCamera} />
             </section>
             <section className="scan_container-relative">
                 <label htmlFor="captura2">Trasera</label>

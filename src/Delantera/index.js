@@ -1,10 +1,13 @@
 import React from 'react';
 
-function Delantera(props) {
+function Delantera({ setUseCamera, img }) {
+    const openCamera = () => {
+        setUseCamera(true);
+    };
     return (
-        <div className="cedula_posterior">
+        <div className="cedula_posterior" onClick={openCamera}>
             <figure>
-                <img src={props.img} alt="identificación parte delaantera " />
+                <img src={img} alt="identificación parte delaantera " />
             </figure>
         </div>
     );
