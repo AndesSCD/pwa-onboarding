@@ -1,10 +1,14 @@
 import React from 'react';
 
-function Trasera(props) {
+function Trasera({ setUseCamera, img, setTakePhoto }) {
+    const openCamera = () => {
+        setUseCamera(true);
+        setTakePhoto('trasera');
+    };
     return (
-        <div className="cedula_posterior">
+        <div className="cedula_posterior" onClick={openCamera}>
             <figure>
-                <img src={props.img} alt="identificación parte posterior " />
+                <img src={img} alt="identificación parte posterior " />
             </figure>
         </div>
     );

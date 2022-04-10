@@ -5,18 +5,25 @@ import { Camera } from './Camera';
 import { Scan } from './Scan';
 import { Error } from './Error';
 
-let cedula_trasera = require('./card1.png');
+let cedula_trasera = require('./card2.png');
 let cedula_delantera = require('./card1.png');
 
 function App() {
     const [useCamera, setUseCamera] = React.useState(false);
     const [image, setImage] = React.useState(cedula_delantera);
     const [imageTrasera, setImagenTrasera] = React.useState(cedula_trasera);
+    const [takePhoto, setTakePhoto] = React.useState('');
     return (
         <Router>
             <section className="scan">
                 {useCamera && (
-                    <Camera useCamera={useCamera} setImage={setImage}></Camera>
+                    <Camera
+                        useCamera={useCamera}
+                        setImage={setImage}
+                        setUseCamera={setUseCamera}
+                        takePhoto={takePhoto}
+                        setImagenTrasera={setImagenTrasera}
+                    ></Camera>
                 )}
 
                 <Switch>
@@ -29,6 +36,7 @@ function App() {
                                 setImage={setImage}
                                 setImagenTrasera={setImagenTrasera}
                                 imageTrasera={imageTrasera}
+                                setTakePhoto={setTakePhoto}
                             />
                         }
                     />

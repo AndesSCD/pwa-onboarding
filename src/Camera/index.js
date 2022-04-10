@@ -181,16 +181,19 @@ function Camera(props) {
                             let foto = $canvas.toDataURL(); //Esta es la foto, en base 64
                             let imgBase64 =
                                 document.getElementById('imgBase64');
-                            props.setImage(
-                                document.getElementById('imgBase64').src
-                            );
                             imgBase64.src = foto;
                             dataURLtoFile(imgBase64.src, 'img.png');
+                            if (props.takePhoto === 'delantera') {
+                                props.setImage(imgBase64.src);
+                            } else {
+                                props.setImagenTrasera(imgBase64.src);
+                            }
                             // {
                             //     props.setImage(foto);
                             // }
                             //Reanudar reproducción
                             $video.play();
+                            props.setUseCamera(false);
                         });
                     },
                     function (error) {

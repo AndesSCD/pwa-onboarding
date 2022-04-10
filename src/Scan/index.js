@@ -12,6 +12,7 @@ function Scan({
     setImage,
     setImagenTrasera,
     imageTrasera,
+    setTakePhoto,
 }) {
     let { id } = useParams();
     let { type } = useParams();
@@ -68,6 +69,7 @@ function Scan({
                     setImage={setImage}
                     setImagenTrasera={setImagenTrasera}
                     imageTrasera={imageTrasera}
+                    setTakePhoto={setTakePhoto}
                 />
             </article>
         );

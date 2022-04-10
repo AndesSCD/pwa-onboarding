@@ -9,6 +9,7 @@ function Cards({
     image,
     setImagenTrasera,
     imageTrasera,
+    setTakePhoto,
 }) {
     const [uploadImage, setUploadImage] = React.useState(false);
     const [uploadImageOne, setUploadImageTwo] = React.useState(false);
@@ -69,11 +70,15 @@ function Cards({
                     }}
                     className="scan_container-absolute"
                 ></input> */}
-                <Delantera img={image} setUseCamera={setUseCamera} />
+                <Delantera
+                    img={image}
+                    setUseCamera={setUseCamera}
+                    setTakePhoto={setTakePhoto}
+                />
             </section>
             <section className="scan_container-relative">
                 <label htmlFor="captura2">Trasera</label>
-                <input
+                {/* <input
                     id="captura2"
                     type="file"
                     accept="image/*"
@@ -86,8 +91,12 @@ function Cards({
                         setUploadImageTwo(true);
                     }}
                     className="scan_container-absolute"
-                ></input>
-                <Trasera img={imageTrasera} />
+                ></input> */}
+                <Trasera
+                    img={imageTrasera}
+                    setUseCamera={setUseCamera}
+                    setTakePhoto={setTakePhoto}
+                />
 
                 <button
                     className={`button_next-disable ${
