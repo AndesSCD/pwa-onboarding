@@ -6,19 +6,18 @@ import {
     Route,
     useParams,
 } from 'react-router-dom';
-import axios from 'axios';
+
+import { Scan } from './Scan';
+import { Error } from './Error';
 
 // images
-let cedula_delantera = require('./card1.png');
-let cedula_trasera = require('./card2.png');
-let image_andes = require('./andes.png');
 
 function App() {
     return (
         <Router>
             <section className="scan">
                 <Switch>
-                    <Route path="/:id/:type" children={<Scan></Scan>} />
+                    <Route path="/:id/:type" children={<Scan />} />
                     <Route
                         path="/:id/"
                         children={
@@ -39,231 +38,6 @@ function App() {
             </section>
         </Router>
     );
-}
-
-function Scan() {
-    let { id } = useParams();
-    let { type } = useParams();
-    let nameCaptureDocument;
-    switch (type) {
-        case 'CC':
-            nameCaptureDocument = 'Capturar cédula';
-            break;
-        case 'CE':
-            nameCaptureDocument = 'Capturar cédula de extranjeria';
-            break;
-        case 'PAS':
-            nameCaptureDocument = 'Capturar pasaporte';
-            break;
-        default:
-            nameCaptureDocument = 'error';
-            break;
-    }
-    const [list, setList] = React.useState([]);
-    React.useEffect(() => {
-        axios({
-            method: 'GET',
-            url: `http://3.85.27.146:5000/api/v1/enrolment/${id}`,
-            headers: {
-                x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
-            },
-        })
-            .then((data) => {
-                setList(data.data[0]);
-            })
-            .catch((err) => console.log(err));
-    }, [list]);
-
-    if (!list) {
-        return (
-            <article className="scan_container">
-                <figure className="andes_img">
-                    <img src={image_andes} alt="" />
-                </figure>
-                <Error error="error" />
-            </article>
-        );
-    }
-    if (type === 'CC' || type === 'CE') {
-        return (
-            <article className="scan_container">
-                <figure className="andes_img">
-                    <img src={image_andes} alt="" />
-                </figure>
-                <h3 className="scan_container-title">{nameCaptureDocument}</h3>
-                <Cards />
-            </article>
-        );
-    } else if (type === 'PAS') {
-        return (
-            <article className="scan_container">
-                <figure className="andes_img">
-                    <img src={image_andes} alt="" />
-                </figure>
-                <h3 className="scan_container-title">{nameCaptureDocument}</h3>
-                <Card />
-            </article>
-        );
-    }
-    return (
-        <article className="scan_container">
-            <figure className="andes_img">
-                <img src={image_andes} alt="" />
-            </figure>
-            <Error error="error" />
-        </article>
-    );
-}
-
-function Cards() {
-    const [image, setImage] = React.useState(cedula_delantera);
-    const [imageTrasera, setImagenTrasera] = React.useState(cedula_trasera);
-    const [uploadImage, setUploadImage] = React.useState(false);
-    const [uploadImageOne, setUploadImageTwo] = React.useState(false);
-    const [visibility, setVisibility] = React.useState('open_camera-none');
-    let [uploadImageU, setUploadImageU] = React.useState('');
-    let [uploadImageUb, setUploadImageUb] = React.useState('');
-    function sendData() {
-        let imagen1 = document.getElementById('captura1');
-        let imagen2 = document.getElementById('captura2');
-        let formData = new FormData();
-        formData.append('image_front', uploadImageU);
-        formData.append('image_back', uploadImageUb);
-        console.log(formData);
-        axios({
-            method: 'POST',
-            url: 'http://3.85.27.146:5000/api/v1/enrolment/abcdefg',
-            data: formData,
-            headers: {
-                x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
-            },
-        })
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
-    }
-
-    return (
-        <React.Fragment>
-            {/* <OpenCamera
-                image={image}
-                setImage={setImage}
-                isVisible={'visibility'}
-            ></OpenCamera> */}
-            <section className="scan_container-relative">
-                <label htmlFor="captura1">Delantera</label>
-                {/* <input
-                    id="captura1"
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={(e) => {
-                        setImage(URL.createObjectURL(e.target.files[0]));
-                        let formData = new FormData();
-                        formData.append('image_front', e.target.files[0]);
-                        setUploadImageU(e.target.files[0]);
-                        // axios({
-                        //     method: 'POST',
-                        //     url: 'http://3.85.27.146:5000/api/v1/enrolment/abcdefg',
-                        //     data: formData,
-                        //     headers: {
-                        //         x_access_token:
-                        //             'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
-                        //     },
-                        // })
-                        //     .then((data) => console.log(data))
-                        //     .catch((err) => console.log(err));
-                        // console.log(uploadImage, uploadImageOne);
-                        setUploadImage(true);
-                    }}
-                    className="scan_container-absolute"
-                ></input> */}
-                <Delantera img={image} />
-            </section>
-            <section className="scan_container-relative">
-                <label htmlFor="captura2">Trasera</label>
-                <input
-                    id="captura2"
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={(e) => {
-                        setImagenTrasera(
-                            URL.createObjectURL(e.target.files[0])
-                        );
-                        setUploadImageUb(e.target.files[0]);
-                        setUploadImageTwo(true);
-                    }}
-                    className="scan_container-absolute"
-                ></input>
-                <Trasera img={imageTrasera} />
-
-                <button
-                    className={`button_next-disable ${
-                        uploadImageOne && uploadImage && 'button_next'
-                    } button_next-enable`}
-                    onClick={sendData}
-                >
-                    Enviar
-                </button>
-            </section>
-        </React.Fragment>
-    );
-}
-
-function Card() {
-    const [image, setImage] = React.useState(cedula_delantera);
-    const [uploadImage, setUploadImage] = React.useState(false);
-
-    return (
-        <React.Fragment>
-            <section className="scan_container-relative">
-                <label htmlFor="captura1">Delantera</label>
-                <input
-                    id="captura1"
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    onChange={(e) => {
-                        setImage(URL.createObjectURL(e.target.files[0]));
-                        setUploadImage(true);
-                    }}
-                    className="scan_container-absolute"
-                ></input>
-                <Delantera img={image} />
-                <button
-                    className={`button_next-disable ${
-                        uploadImage && 'button_next'
-                    } button_next-enable`}
-                >
-                    Enviar
-                </button>
-            </section>
-        </React.Fragment>
-    );
-}
-
-function Delantera(props) {
-    return (
-        <div className="cedula_posterior">
-            <figure>
-                <img src={props.img} alt="identificación parte delaantera " />
-            </figure>
-        </div>
-    );
-}
-
-function Trasera(props) {
-    return (
-        <div className="cedula_posterior">
-            <figure>
-                <img src={props.img} alt="identificación parte posterior " />
-            </figure>
-        </div>
-    );
-}
-
-function Error(props) {
-    return <div>{props.error}</div>;
 }
 
 // function OpenCamera(props) {
