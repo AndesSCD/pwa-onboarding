@@ -15,6 +15,8 @@ function App() {
     const [takePhoto, setTakePhoto] = React.useState('');
     let [direction, setDirection] = React.useState();
     let [identification, setIdentification] = React.useState();
+    const [uploadImage, setUploadImage] = React.useState(false);
+    const [uploadImageOne, setUploadImageTwo] = React.useState(false);
 
     return (
         <Router>
@@ -28,6 +30,8 @@ function App() {
                         setImagenTrasera={setImagenTrasera}
                         identification={identification}
                         direction={direction}
+                        setUploadImage={setUploadImage}
+                        setUploadImageTwo={setUploadImageTwo}
                     ></Camera>
                 )}
 
@@ -44,6 +48,8 @@ function App() {
                                 setTakePhoto={setTakePhoto}
                                 setDirection={setDirection}
                                 setIdentification={setIdentification}
+                                uploadImage={uploadImage}
+                                uploadImageOne={uploadImageOne}
                             />
                         }
                     />

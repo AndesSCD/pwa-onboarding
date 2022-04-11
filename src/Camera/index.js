@@ -195,8 +195,10 @@ function Camera(props) {
                             dataURLtoFile(imgBase64.src, 'img.png');
                             if (props.takePhoto === 'delantera') {
                                 props.setImage(imgBase64.src);
+                                props.setUploadImage(true);
                             } else {
                                 props.setImagenTrasera(imgBase64.src);
+                                props.setUploadImageTwo(true);
                             }
                             // {
                             //     props.setImage(foto);

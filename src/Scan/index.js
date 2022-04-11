@@ -15,6 +15,8 @@ function Scan({
     setTakePhoto,
     setDirection,
     setIdentification,
+    uploadImage,
+    uploadImageOne,
 }) {
     let { id } = useParams();
     let { type } = useParams();
@@ -82,6 +84,8 @@ function Scan({
                     imageTrasera={imageTrasera}
                     setTakePhoto={setTakePhoto}
                     setDirection={setDirection}
+                    uploadImage={uploadImage}
+                    uploadImageOne={uploadImageOne}
                 />
             </article>
         );

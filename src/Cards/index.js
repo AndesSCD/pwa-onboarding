@@ -2,6 +2,7 @@ import React from 'react';
 import { Delantera } from '../Delantera';
 import { Trasera } from '../Trasera';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Cards({
     setUseCamera,
@@ -11,9 +12,9 @@ function Cards({
     imageTrasera,
     setTakePhoto,
     setDirection,
+    uploadImage,
+    uploadImageOne,
 }) {
-    const [uploadImage, setUploadImage] = React.useState(false);
-    const [uploadImageOne, setUploadImageTwo] = React.useState(false);
     let [uploadImageU, setUploadImageU] = React.useState('');
     let [uploadImageUb, setUploadImageUb] = React.useState('');
     function sendData() {
@@ -31,8 +32,26 @@ function Cards({
                 x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
             },
         })
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
+            .then(() =>
+                Swal.fire({
+                    title: 'Imagen cargada con exito',
+                    text: 'Continua en la plataforma web',
+                    icon: 'success',
+                    confirmButtonText: 'Continuar en la plataforma web',
+                    confirmButtonColor: '#004777',
+                }).then(() => {
+                    window.location.replace('https://www.wikipedia.com');
+                })
+            )
+            .catch((err) =>
+                Swal.fire({
+                    title: 'Error inesperado',
+                    text: 'Intentalo de nuevo',
+                    icon: 'error',
+                    confirmButtonText: 'Reintentar',
+                    confirmButtonColor: '#004777',
+                })
+            );
     }
 
     return (
