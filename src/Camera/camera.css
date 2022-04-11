@@ -4,5 +4,108 @@
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(32,35,41,.8);
+    max-width: 100vw;
+}
+.button_take{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 4px solid #8080808f;
+    outline: 0;
+}
+.video{
+    width: 90vw;
+    z-index: 1;
+}
 
+.camera_open-absolute{
+    position: absolute;
+    bottom: 10%;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+.camera_open-absolute > div{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    color:#fff;
+    row-gap: 8px;
+}
+.camera_open-absolute > div figure{
+    display: contents;
+}
+ .camera_open-absolute > div figure img{
+    width: 80vw;
+    height: auto
+}
+.back{
+    position: absolute;
+}
+.back{
+    top: 4%;
+    left: 12%;
+    z-index: 70;
+}
+.back figure img{
+    width: 40px
+}
+.listaDeDispositivos{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+    color: transparent;
+    background: transparent;
+    z-index: 1;
+}
+#modal > section > article > div.camera_open-absolute > div.buttons_container > figure{
+    z-index: 0;
+
+}
+#modal > section > article > div.camera_open-absolute > div.buttons_container > div > figure > img{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+body .buttons_container{
+    width: 70%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+}
+.camera_open-absolute-containerS{
+    display: flex;
+}
+.camera_open-absolute-containerS{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width:425px) {
+    .video{
+        height: 100vh;
+        width: 100vw;
+    }
+    .camera_open-absolute{
+        width: 100vw;
+        bottom: 100px;
+    }
+    .camera_open-absolute > div figure img{
+        width: 100vw;
+    }
+    .camera_open-absolute div:first-child p{
+        text-align: center;
+    }
+    
 }

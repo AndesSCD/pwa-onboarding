@@ -13,24 +13,35 @@ function Scan({
     setImagenTrasera,
     imageTrasera,
     setTakePhoto,
+    setDirection,
+    setIdentification,
 }) {
     let { id } = useParams();
     let { type } = useParams();
     let nameCaptureDocument;
-    switch (type) {
-        case 'CC':
-            nameCaptureDocument = 'Capturar cédula';
-            break;
-        case 'CE':
-            nameCaptureDocument = 'Capturar cédula de extranjeria';
-            break;
-        case 'PAS':
-            nameCaptureDocument = 'Capturar pasaporte';
-            break;
-        default:
-            nameCaptureDocument = 'error';
-            break;
-    }
+    React.useEffect(() => {
+        switch (type) {
+            case 'CC':
+                nameCaptureDocument = 'Capturar cédula';
+                setIdentification('cedula');
+                break;
+            case 'CE':
+                nameCaptureDocument = 'Capturar cédula de extranjeria';
+                setIdentification('cédula de extranjeria');
+
+                break;
+            case 'PAS':
+                nameCaptureDocument = 'Capturar pasaporte';
+                setIdentification('pasaporte');
+                setIdentification('pasaporte');
+
+                break;
+            default:
+                nameCaptureDocument = 'error';
+                break;
+        }
+    });
+
     const [list, setList] = React.useState([]);
     React.useEffect(() => {
         axios({
@@ -70,6 +81,7 @@ function Scan({
                     setImagenTrasera={setImagenTrasera}
                     imageTrasera={imageTrasera}
                     setTakePhoto={setTakePhoto}
+                    setDirection={setDirection}
                 />
             </article>
         );

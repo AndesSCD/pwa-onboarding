@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Delantera({ setUseCamera, img, setTakePhoto }) {
+function Delantera({ setUseCamera, img, setTakePhoto, setDirection }) {
     const openCamera = () => {
         setUseCamera(true);
         setTakePhoto('delantera');
+        setDirection('FRENTE');
     };
     return (
         <div className="cedula_posterior" onClick={openCamera}>

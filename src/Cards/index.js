@@ -10,10 +10,10 @@ function Cards({
     setImagenTrasera,
     imageTrasera,
     setTakePhoto,
+    setDirection,
 }) {
     const [uploadImage, setUploadImage] = React.useState(false);
     const [uploadImageOne, setUploadImageTwo] = React.useState(false);
-    const [visibility, setVisibility] = React.useState('open_camera-none');
     let [uploadImageU, setUploadImageU] = React.useState('');
     let [uploadImageUb, setUploadImageUb] = React.useState('');
     function sendData() {
@@ -74,6 +74,7 @@ function Cards({
                     img={image}
                     setUseCamera={setUseCamera}
                     setTakePhoto={setTakePhoto}
+                    setDirection={setDirection}
                 />
             </section>
             <section className="scan_container-relative">
@@ -96,6 +97,7 @@ function Cards({
                     img={imageTrasera}
                     setUseCamera={setUseCamera}
                     setTakePhoto={setTakePhoto}
+                    setDirection={setDirection}
                 />
 
                 <button

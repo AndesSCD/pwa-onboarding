@@ -13,6 +13,9 @@ function App() {
     const [image, setImage] = React.useState(cedula_delantera);
     const [imageTrasera, setImagenTrasera] = React.useState(cedula_trasera);
     const [takePhoto, setTakePhoto] = React.useState('');
+    let [direction, setDirection] = React.useState();
+    let [identification, setIdentification] = React.useState();
+
     return (
         <Router>
             <section className="scan">
@@ -23,6 +26,8 @@ function App() {
                         setUseCamera={setUseCamera}
                         takePhoto={takePhoto}
                         setImagenTrasera={setImagenTrasera}
+                        identification={identification}
+                        direction={direction}
                     ></Camera>
                 )}
 
@@ -37,6 +42,8 @@ function App() {
                                 setImagenTrasera={setImagenTrasera}
                                 imageTrasera={imageTrasera}
                                 setTakePhoto={setTakePhoto}
+                                setDirection={setDirection}
+                                setIdentification={setIdentification}
                             />
                         }
                     />

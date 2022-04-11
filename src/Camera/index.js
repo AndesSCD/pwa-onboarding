@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './camera.css';
 
+import cedula from '../cedula.svg';
+import back from '../arrow_back_white_24dp.svg';
+import reverse from '../change_circle_white_24dp.svg';
+
 function Camera(props) {
     let useCamera = props.useCamera;
     let [here, setHere] = React.useState(0);
@@ -11,6 +15,8 @@ function Camera(props) {
         console.log(here);
     }
     React.useEffect(() => {
+        let initial = 0;
+        let options = [];
         const takePicture = () => {
             function dataURLtoFile(dataurl, filename) {
                 var arr = dataurl.split(','),
@@ -82,7 +88,8 @@ function Camera(props) {
                         });
 
                         // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
-                        if (dispositivosDeVideo.length > 0 && contador === 0) {
+                        if (dispositivosDeVideo.length > 0 && initial == 0) {
+                            console.log('entra');
                             // Llenar el select
                             dispositivosDeVideo.forEach((dispositivo) => {
                                 const option = document.createElement('option');
@@ -90,16 +97,15 @@ function Camera(props) {
                                 option.text = dispositivo.label;
                                 $listaDeDispositivos.appendChild(option);
                             });
+                            initial = 1;
                         }
-                        contador = 1;
+                        contador = dispositivosDeVideo.length;
                     });
             };
 
             // Comenzamos viendo si tiene soporte, si no, nos detenemos
             if (!tieneSoporteUserMedia()) {
                 alert('Lo siento. Tu navegador no soporta esta característica');
-                $estado.innerHTML =
-                    'Parece que tu navegador no soporta esta característica. Intenta actualizarlo.';
                 return;
             }
             //Aquí guardaremos el stream globalmente
@@ -120,7 +126,6 @@ function Camera(props) {
                         }
                     });
                     let total = dispositivosDeVideo.length;
-                    console.log(dispositivosDeVideo, dispositivos);
 
                     // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                     // y le pasamos el id de dispositivo
@@ -138,12 +143,16 @@ function Camera(props) {
                             deviceId: idDeDispositivo,
                         },
                     },
+
                     function (streamObtenido) {
+                        let changeDevice =
+                            document.getElementById('changeDevice');
+
                         // Aquí ya tenemos permisos, ahora sí llenamos el select,
                         // pues si no, no nos daría el nombre de los dispositivos
                         llenarSelectConDispositivosDisponibles();
-                        console.log($listaDeDispositivos);
                         // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
+
                         $listaDeDispositivos.onchange = () => {
                             // Detener el stream
                             if (stream) {
@@ -151,6 +160,7 @@ function Camera(props) {
                                     track.stop();
                                 });
                             }
+
                             // Mostrar el nuevo stream con el dispositivo seleccionado
                             mostrarStream($listaDeDispositivos.value);
                         };
@@ -206,21 +216,49 @@ function Camera(props) {
             takePicture();
         }
     });
+    const closeModal = () => {
+        props.setUseCamera(false);
+    };
 
     return ReactDOM.createPortal(
         <section className="camera_open">
-            <article></article>
-            <article>
-                <video muted="muted" id="video"></video>
+            <div className="back">
+                <figure>
+                    <img src={back} alt="" onClick={closeModal} />
+                </figure>
+            </div>
+            <article className="camera_open-relative">
+                <video muted="muted" id="video" className="video"></video>
+                <div className="camera_open-absolute">
+                    <div>
+                        <h3>
+                            {props.direction} de tu {props.identification}
+                        </h3>
+                        <figure>
+                            <img src={cedula} alt="" />
+                        </figure>
+                        <p>
+                            Ubica el {props.direction} de tu{' '}
+                            {props.identification} dentro del recuadro
+                        </p>
+                    </div>
+                    <div className="buttons_container">
+                        <button id="boton" className="button_take"></button>
+                        <div className="camera_open-absolute-containerS">
+                            <select
+                                name="listaDeDispositivos"
+                                id="listaDeDispositivos"
+                                className="listaDeDispositivos"
+                            ></select>
+                            <figure class="camera_open-relative-icon">
+                                <img src={reverse} alt="" />
+                            </figure>
+                        </div>
+                    </div>
+                </div>
             </article>
-            <button onClick={changeDirection}>asdasdasdasd</button>
-            <select
-                name="listaDeDispositivos"
-                id="listaDeDispositivos"
-            ></select>
-            <button id="boton" className="button_take">
-                Click
-            </button>
+            <button onClick={changeDirection}></button>
+
             <img src="" alt="" id="imgBase64" />
             <canvas id="canvas" style={{ display: 'none' }}></canvas>
         </section>,
