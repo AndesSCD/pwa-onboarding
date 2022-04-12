@@ -60,7 +60,7 @@
     opacity: 0;
 }
 .andes_img img{
-    width: 8vw;
+    width: 300px;
 }
 .scan_container-relative label{
     font-size:14px;
@@ -97,7 +97,7 @@
 
 @media(max-width:768px){
     .andes_img img{
-        width: 110px;
+        width: 200px;
     }
     .cedula_posterior{
         width: 270px;
