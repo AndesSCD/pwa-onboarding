@@ -252,7 +252,7 @@ function Camera(props) {
                                 id="listaDeDispositivos"
                                 className="listaDeDispositivos"
                             ></select>
-                            <figure class="camera_open-relative-icon">
+                            <figure className="camera_open-relative-icon">
                                 <img src={reverse} alt="" />
                             </figure>
                         </div>

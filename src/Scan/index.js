@@ -32,7 +32,7 @@ function Scan({
                 setIdentification('cédula de extranjeria');
 
                 break;
-            case 'PAS':
+            case 'P':
                 nameCaptureDocument = 'Capturar pasaporte';
                 setIdentification('pasaporte');
                 setIdentification('pasaporte');
@@ -89,14 +89,24 @@ function Scan({
                 />
             </article>
         );
-    } else if (type === 'PAS') {
+    } else if (type === 'P') {
         return (
             <article className="scan_container">
                 <figure className="andes_img">
                     <img src={image_andes} alt="" />
                 </figure>
                 <h3 className="scan_container-title">{nameCaptureDocument}</h3>
-                <Card />
+                <Card
+                    setUseCamera={setUseCamera}
+                    image={image}
+                    setImage={setImage}
+                    setImagenTrasera={setImagenTrasera}
+                    imageTrasera={imageTrasera}
+                    setTakePhoto={setTakePhoto}
+                    setDirection={setDirection}
+                    uploadImage={uploadImage}
+                    uploadImageOne={uploadImageOne}
+                />
             </article>
         );
     }

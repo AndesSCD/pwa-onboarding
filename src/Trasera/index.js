@@ -9,7 +9,7 @@ function Trasera({ setUseCamera, img, setTakePhoto, setDirection }) {
     return (
         <div className="cedula_posterior" onClick={openCamera}>
             <figure>
-                <img src={img} alt="identificación parte posterior " />
+                <img src={img} alt="identificación parte posterior " id="captura2" />
             </figure>
         </div>
     );

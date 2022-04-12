@@ -9,7 +9,7 @@ function Delantera({ setUseCamera, img, setTakePhoto, setDirection }) {
     return (
         <div className="cedula_posterior" onClick={openCamera}>
             <figure>
-                <img src={img} alt="identificación parte delaantera " />
+                <img src={img} alt="identificación parte delaantera " id="captura1" />
             </figure>
         </div>
     );

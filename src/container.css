@@ -1,14 +1,16 @@
-.scan{
+.scan {
     background: #393939;
-    height:100vh;
-    width:100vw;
-    display:flex;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
     align-items: flex-end;
 }
-.scan h2{
+
+.scan h2 {
     margin: 0;
 }
-.scan_container{
+
+.scan_container {
     width: 100%;
     height: 98vh;
     background: #fff;
@@ -18,24 +20,29 @@
     flex-direction: column;
     align-items: center;
 }
-.cedula_posterior{
+
+.cedula_posterior {
     width: 400px;
     height: 140px;
     border-radius: 4px;
     border: 2px solid #5fddbf;
 }
-.cedula_posterior figure{
+
+.cedula_posterior figure {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.cedula_posterior figure, .cedula_posterior figure img{
-    height:90%;
+
+.cedula_posterior figure,
+.cedula_posterior figure img {
+    height: 90%;
     object-fit: cover;
 }
-.scan_container-title{
-    
+
+.scan_container-title {
+
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
@@ -43,7 +50,8 @@
     font-size: 16px;
     text-transform: uppercase;
 }
-.scan_container-relative{
+
+.scan_container-relative {
     position: relative;
     margin: 14px 0;
     display: flex;
@@ -53,27 +61,32 @@
     row-gap: 12px;
 
 }
-.scan_container-absolute{
+
+.scan_container-absolute {
     position: absolute;
     width: 400px;
     height: 140px;
     opacity: 0;
 }
-.andes_img img{
+
+.andes_img img {
     width: 300px;
 }
-.scan_container-relative label{
-    font-size:14px;
+
+.scan_container-relative label {
+    font-size: 14px;
     color: #004777;
 }
-.button_next-disable{
+
+.button_next-disable {
     display: none;
 }
-.button_next{
+
+.button_next {
     display: flex
 }
 
-.button_next-enable{
+.button_next-enable {
     padding: 8px 40px;
     background: #004777;
     color: #fff;
@@ -82,7 +95,8 @@
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
 }
-.UpIdk{
+
+.UpIdk {
     position: absolute;
     top: 0;
     left: 0;
@@ -91,20 +105,50 @@
     background-color: #004777;
     z-index: 3890132809132809132809132809132809;
 }
-.none{
+
+.none {
     display: none;
 }
 
-@media(max-width:768px){
-    .andes_img img{
+@media(max-width:768px) {
+    .andes_img img {
         width: 200px;
     }
-    .cedula_posterior{
+
+    .cedula_posterior {
         width: 270px;
     }
 }
-@media(max-width:320px){
-.scan{
-        overflow-x: hidden;
+
+@media(max-width:425px) {
+    body .video {
+        height: 100vh;
+        width: auto;
+    }
+
+    .camera_open-absolute {
+        transform: rotate(90deg);
+        margin-left: 0;
+        margin-top: 160px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+        top: 0;
+    }
+
+    .camera_open-absolute:nth-child(1) {
+        margin-top: -300px;
+        margin-left: -320px;
+    }
+
+    .buttons_container {
+        justify-content: flex-end;
+    }
 }
+
+@media(max-width:320px) {
+    .scan {
+        overflow-x: hidden;
+    }
 }
