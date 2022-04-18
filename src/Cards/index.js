@@ -34,7 +34,7 @@ function Cards({
         formData.append('image_front', newImage);
         // axios({
         //     method: 'POST',
-        //     url: 'http://3.85.27.146:5000/api/v1/enrolment/abcdefg',
+        //     url: 'https://backend.apfnogales.com/api/v1/enrolment/abcdefg',
         //     data: formData,
         //     headers: {
         //         x_access_token:
@@ -56,7 +56,7 @@ function Cards({
         console.log(id);
         await axios({
             method: 'POST',
-            url: `http://3.85.27.146:5000/api/v1/enrolment/${id}`,
+            url: `https://backend.apfnogales.com/api/v1/enrolment/${id}`,
             data: formData,
             headers: {
                 x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
@@ -70,18 +70,21 @@ function Cards({
                     confirmButtonText: 'Continuar en la plataforma web',
                     confirmButtonColor: '#004777',
                 }).then(() => {
-                    window.location.replace('https://www.wikipedia.com');
+                    window.location.replace(
+                        'https://frontangular.apfnogales.com/'
+                    );
                 })
             )
-            .catch((err) =>
+            .catch((err) => {
+                console.error(err);
                 Swal.fire({
                     title: 'Error inesperado',
                     text: 'Intentalo de nuevo',
                     icon: 'error',
                     confirmButtonText: 'Reintentar',
                     confirmButtonColor: '#004777',
-                })
-            );
+                });
+            });
     }
 
     return (

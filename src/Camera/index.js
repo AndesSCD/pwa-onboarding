@@ -33,7 +33,7 @@ function Camera(props) {
                 formData.append('image_front', newImage);
                 // axios({
                 //     method: 'POST',
-                //     url: 'http://3.85.27.146:5000/api/v1/enrolment/abcdefg',
+                //     url: 'https://backend.apfnogales.com/api/v1/enrolment/abcdefg',
                 //     data: formData,
                 //     headers: {
                 //         x_access_token:

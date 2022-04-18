@@ -18,8 +18,6 @@ function Card({
     uploadImageOne,
 }) {
     let { id } = useParams();
-    let [uploadImageU, setUploadImageU] = React.useState('');
-    let [uploadImageUb, setUploadImageUb] = React.useState('');
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -47,7 +45,7 @@ function Card({
         console.log(id);
         await axios({
             method: 'POST',
-            url: `http://3.85.27.146:5000/api/v1/enrolment/${id}`,
+            url: `https://backend.apfnogales.com/api/v1/enrolment/${id}`,
             data: formData,
             headers: {
                 x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
@@ -61,18 +59,21 @@ function Card({
                     confirmButtonText: 'Continuar en la plataforma web',
                     confirmButtonColor: '#004777',
                 }).then(() => {
-                    window.location.replace('https://www.wikipedia.com');
+                    window.location.replace(
+                        'https://frontreact.apfnogales.com/'
+                    );
                 })
             )
-            .catch((err) =>
+            .catch((err) => {
+                console.error(err);
                 Swal.fire({
                     title: 'Error inesperado',
                     text: 'Intentalo de nuevo',
                     icon: 'error',
                     confirmButtonText: 'Reintentar',
                     confirmButtonColor: '#004777',
-                })
-            );
+                });
+            });
     }
 
     return (
@@ -87,7 +88,7 @@ function Card({
                 />
                 <button
                     className={`button_next-disable ${
-                        uploadImageOne && 'button_next'
+                        uploadImage && 'button_next'
                     } button_next-enable`}
                     onClick={sendData}
                 >

@@ -48,7 +48,7 @@ function Scan({
     React.useEffect(() => {
         axios({
             method: 'GET',
-            url: `http://3.85.27.146:5000/api/v1/enrolment/${id}`,
+            url: `https://backend.apfnogales.com/api/v1/enrolment/${id}`,
             headers: {
                 x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
             },
