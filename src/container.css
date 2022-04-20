@@ -145,8 +145,11 @@
     .buttons_container {
         justify-content: flex-end;
     }
+   
+    /* .cedula_posterior-hidden img {
+        transform: rotate(270deg);
+    } */
 }
-
 @media(max-width:320px) {
     .scan {
         overflow-x: hidden;

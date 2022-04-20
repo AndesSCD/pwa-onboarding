@@ -17,8 +17,7 @@ function Cards({
     uploadImageOne,
 }) {
     let { id } = useParams();
-    let [uploadImageU, setUploadImageU] = React.useState('');
-    let [uploadImageUb, setUploadImageUb] = React.useState('');
+
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -32,17 +31,6 @@ function Cards({
         let newImage = new File([u8arr], filename, { type: mime });
         let formData = new FormData();
         formData.append('image_front', newImage);
-        // axios({
-        //     method: 'POST',
-        //     url: 'https://backend.apfnogales.com/api/v1/enrolment/abcdefg',
-        //     data: formData,
-        //     headers: {
-        //         x_access_token:
-        //             'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
-        //     },
-        // })
-        //     .then((data) => console.log(data))
-        //     .catch((err) => console.log(err));
         return new File([u8arr], filename, { type: mime });
     }
     async function sendData() {
@@ -53,7 +41,6 @@ function Cards({
         let formData = new FormData();
         formData.append('image_front', convert1);
         formData.append('image_back', convert2);
-        console.log(id);
         await axios({
             method: 'POST',
             url: `https://backend.apfnogales.com/api/v1/enrolment/${id}`,
@@ -101,6 +88,7 @@ function Cards({
                     setUseCamera={setUseCamera}
                     setTakePhoto={setTakePhoto}
                     setDirection={setDirection}
+                    uploadImage={uploadImage}
                 />
             </section>
             <section className="scan_container-relative">

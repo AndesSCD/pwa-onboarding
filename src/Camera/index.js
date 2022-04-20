@@ -181,12 +181,16 @@ function Camera(props) {
                             let contexto = $canvas.getContext('2d');
                             $canvas.width = $video.videoWidth;
                             $canvas.height = $video.videoHeight;
+
+                            contexto.translate(
+                                $canvas.width / 2,
+                                $canvas.height / 2
+                            );
+                            contexto.rotate((31 * Math.PI) / 2);
                             contexto.drawImage(
                                 $video,
-                                0,
-                                0,
-                                $canvas.width,
-                                $canvas.height
+                                $video.videoWidth / -2,
+                                $video.videoHeight / -2
                             );
                             let foto = $canvas.toDataURL(); //Esta es la foto, en base 64
                             let imgBase64 =
