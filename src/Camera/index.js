@@ -33,7 +33,7 @@ function Camera(props) {
                 formData.append('image_front', newImage);
                 // axios({
                 //     method: 'POST',
-                //     url: 'https://backend.apfnogales.com/api/v1/enrolment/abcdefg',
+                //     url: 'https://apiomovil.andesscd.com.co/api/v1/enrolment/abcdefg',
                 //     data: formData,
                 //     headers: {
                 //         x_access_token:
