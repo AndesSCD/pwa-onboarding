@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import './camera.css';
 
 import cedula from '../cedula.svg';
@@ -16,7 +15,6 @@ function Camera(props) {
     }
     React.useEffect(() => {
         let initial = 0;
-        let options = [];
         const takePicture = () => {
             function dataURLtoFile(dataurl, filename) {
                 var arr = dataurl.split(','),
@@ -125,7 +123,6 @@ function Camera(props) {
                             dispositivosDeVideo.push(dispositivo);
                         }
                     });
-                    let total = dispositivosDeVideo.length;
 
                     // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                     // y le pasamos el id de dispositivo
@@ -145,9 +142,6 @@ function Camera(props) {
                     },
 
                     function (streamObtenido) {
-                        let changeDevice =
-                            document.getElementById('changeDevice');
-
                         // Aquí ya tenemos permisos, ahora sí llenamos el select,
                         // pues si no, no nos daría el nombre de los dispositivos
                         llenarSelectConDispositivosDisponibles();

@@ -60,7 +60,7 @@ function Card({
                     confirmButtonColor: '#004777',
                 }).then(() => {
                     window.location.replace(
-                        'https://frontreact.apfnogales.com/'
+                        'https://onboarding.andesscd.com.co/'
                     );
                 })
             )

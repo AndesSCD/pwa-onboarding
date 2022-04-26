@@ -58,7 +58,7 @@ function Cards({
                     confirmButtonColor: '#004777',
                 }).then(() => {
                     window.location.replace(
-                        'https://frontangular.apfnogales.com/'
+                        'https://onboarding.andesscd.com.co/'
                     );
                 })
             )
