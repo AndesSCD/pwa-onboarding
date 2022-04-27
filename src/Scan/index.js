@@ -1,7 +1,7 @@
 import React from 'react';
 import { Cards } from '../Cards';
 import { Error } from '../Error';
-import { Card } from '../Card';
+import { Pasaporte } from '../Card/pasaporte';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 let image_andes = require('../andes.png');
@@ -96,7 +96,7 @@ function Scan({
                     <img src={image_andes} alt="" />
                 </figure>
                 <h3 className="scan_container-title">{nameCaptureDocument}</h3>
-                <Card
+                <Pasaporte
                     setUseCamera={setUseCamera}
                     image={image}
                     setImage={setImage}

@@ -109,6 +109,10 @@
 .none {
     display: none;
 }
+.cedula_posterior-hidden{
+    width: fit-content;
+    padding: 0 20px;
+}
 
 @media(max-width:768px) {
     .andes_img img {
@@ -149,6 +153,10 @@
     /* .cedula_posterior-hidden img {
         transform: rotate(270deg);
     } */
+    .cedula_posterior-hidden{
+        width: fit-content;
+        padding: 0 20px;
+    }
 }
 @media(max-width:320px) {
     .scan {

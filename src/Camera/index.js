@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './camera.css';
 
 import cedula from '../cedula.svg';
+import trasera from '../trasera.svg';
 import back from '../arrow_back_white_24dp.svg';
 import reverse from '../change_circle_white_24dp.svg';
 
@@ -12,6 +13,10 @@ function Camera(props) {
     function changeDirection(limit) {
         setHere(++here);
         console.log(here);
+    }
+    let credencial = cedula;
+    if (props.direction !== 'FRENTE') {
+        credencial = trasera;
     }
     React.useEffect(() => {
         let initial = 0;
@@ -42,7 +47,6 @@ function Camera(props) {
                 //     .catch((err) => console.log(err));
                 return new File([u8arr], filename, { type: mime });
             }
-            let contador = 0;
             function tieneSoporteUserMedia() {
                 return !!(
                     navigator.getUserMedia ||
@@ -87,7 +91,6 @@ function Camera(props) {
 
                         // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                         if (dispositivosDeVideo.length > 0 && initial == 0) {
-                            console.log('entra');
                             // Llenar el select
                             dispositivosDeVideo.forEach((dispositivo) => {
                                 const option = document.createElement('option');
@@ -97,7 +100,6 @@ function Camera(props) {
                             });
                             initial = 1;
                         }
-                        contador = dispositivosDeVideo.length;
                     });
             };
 
@@ -126,8 +128,10 @@ function Camera(props) {
 
                     // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                     // y le pasamos el id de dispositivo
-                    if (dispositivosDeVideo.length > 0) {
+                    if (dispositivosDeVideo.length > 1) {
                         // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
+                        mostrarStream(dispositivosDeVideo[1].deviceId);
+                    } else if (dispositivosDeVideo.length > 0) {
                         mostrarStream(dispositivosDeVideo[0].deviceId);
                     }
                 });
@@ -173,14 +177,14 @@ function Camera(props) {
 
                             //Obtener contexto del canvas y dibujar sobre él
                             let contexto = $canvas.getContext('2d');
-                            $canvas.width = $video.videoWidth;
-                            $canvas.height = $video.videoHeight;
+                            $canvas.width = $video.videoHeight;
+                            $canvas.height = $video.videoWidth;
 
                             contexto.translate(
                                 $canvas.width / 2,
                                 $canvas.height / 2
                             );
-                            contexto.rotate((31 * Math.PI) / 2);
+                            contexto.rotate((Math.PI * 3) / 2);
                             contexto.drawImage(
                                 $video,
                                 $video.videoWidth / -2,
@@ -215,7 +219,7 @@ function Camera(props) {
         if (useCamera) {
             takePicture();
         }
-    });
+    }, []);
     const closeModal = () => {
         props.setUseCamera(false);
     };
@@ -235,7 +239,7 @@ function Camera(props) {
                             {props.direction} de tu {props.identification}
                         </h3>
                         <figure>
-                            <img src={cedula} alt="" />
+                            <img src={credencial} alt="" />
                         </figure>
                         <p>
                             Ubica el {props.direction} de tu{' '}

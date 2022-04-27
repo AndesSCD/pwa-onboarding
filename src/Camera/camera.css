@@ -102,7 +102,7 @@ body .buttons_container{
         bottom: 100px;
     }
     .camera_open-absolute > div figure img{
-        width: 100vw;
+        width: 78vh;
     }
     .camera_open-absolute div:first-child p{
         text-align: center;

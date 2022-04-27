@@ -5,6 +5,7 @@ function Delantera({
     img,
     setTakePhoto,
     setDirection,
+    uploadImageOne,
     uploadImage,
 }) {
     const openCamera = () => {
@@ -12,6 +13,7 @@ function Delantera({
         setTakePhoto('delantera');
         setDirection('FRENTE');
     };
+
     return (
         <div
             className={`cedula_posterior ${

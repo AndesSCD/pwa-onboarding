@@ -1,11 +1,12 @@
 import React from 'react';
 import { Delantera } from '../Delantera';
-import { Trasera } from '../Trasera';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 
-function Cards({
+let cedula_delantera = require('../card1.png');
+
+function Pasaporte({
     setUseCamera,
     setImage,
     image,
@@ -17,7 +18,6 @@ function Cards({
     uploadImageOne,
 }) {
     let { id } = useParams();
-
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -31,16 +31,14 @@ function Cards({
         let newImage = new File([u8arr], filename, { type: mime });
         let formData = new FormData();
         formData.append('image_front', newImage);
+
         return new File([u8arr], filename, { type: mime });
     }
     async function sendData() {
         let imagen1 = document.getElementById('captura1').src;
-        let imagen2 = document.getElementById('captura2').src;
         let convert1 = dataURLtoFile(imagen1, 'image_front.png');
-        let convert2 = dataURLtoFile(imagen2, 'image_back.png');
         let formData = new FormData();
         formData.append('image_front', convert1);
-        formData.append('image_back', convert2);
         await axios({
             method: 'POST',
             url: `https://apiomovil.andesscd.com.co/api/v1/enrolment/${id}`,
@@ -76,11 +74,6 @@ function Cards({
 
     return (
         <React.Fragment>
-            {/* <OpenCamera
-                image={image}
-                setImage={setImage}
-                isVisible={'visibility'}
-            ></OpenCamera> */}
             <section className="scan_container-relative">
                 <label htmlFor="captura1">Delantera</label>
                 <Delantera
@@ -88,25 +81,10 @@ function Cards({
                     setUseCamera={setUseCamera}
                     setTakePhoto={setTakePhoto}
                     setDirection={setDirection}
-                    uploadImage={uploadImage}
-                    uploadImageOne={uploadImageOne}
                 />
-            </section>
-            <section className="scan_container-relative">
-                <label htmlFor="captura2">Trasera</label>
-
-                <Trasera
-                    img={imageTrasera}
-                    setUseCamera={setUseCamera}
-                    setTakePhoto={setTakePhoto}
-                    setDirection={setDirection}
-                    uploadImageOne={uploadImageOne}
-                    uploadImage={uploadImage}
-                />
-
                 <button
                     className={`button_next-disable ${
-                        uploadImageOne && uploadImage && 'button_next'
+                        uploadImage && 'button_next'
                     } button_next-enable`}
                     onClick={sendData}
                 >
@@ -116,4 +94,5 @@ function Cards({
         </React.Fragment>
     );
 }
-export { Cards };
+
+export { Pasaporte };
