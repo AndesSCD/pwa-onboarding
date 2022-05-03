@@ -3,7 +3,7 @@ import { Delantera } from '../Delantera';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
-
+import { Loader } from '../Loader/Loader';
 let cedula_delantera = require('../card1.png');
 
 function Pasaporte({
@@ -18,6 +18,7 @@ function Pasaporte({
     uploadImageOne,
 }) {
     let { id } = useParams();
+    let [loader, setLoader] = React.useState(false);
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
@@ -47,7 +48,8 @@ function Pasaporte({
                 x_access_token: 'uTKGjgGvK2CAKwkioaLr43h45hdfhdfhDG53Edgsdg',
             },
         })
-            .then((data) =>
+            .then((data) => {
+                setLoader(true);
                 Swal.fire({
                     title: 'Imagen cargada con exito',
                     text: 'Continua en la plataforma web',
@@ -55,11 +57,9 @@ function Pasaporte({
                     confirmButtonText: 'Continuar en la plataforma web',
                     confirmButtonColor: '#004777',
                 }).then(() => {
-                    window.location.replace(
-                        'https://onboarding.andesscd.com.co/'
-                    );
-                })
-            )
+                    window.location.replace('https://www.andesscd.com.co/');
+                });
+            })
             .catch((err) => {
                 console.error(err);
                 Swal.fire({
@@ -74,6 +74,7 @@ function Pasaporte({
 
     return (
         <React.Fragment>
+            {loader && <Loader />}
             <section className="scan_container-relative">
                 <label htmlFor="captura1">Delantera</label>
                 <Delantera

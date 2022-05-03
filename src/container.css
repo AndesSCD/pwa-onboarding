@@ -42,7 +42,6 @@
 }
 
 .scan_container-title {
-
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
@@ -59,7 +58,6 @@
     justify-content: center;
     align-items: center;
     row-gap: 12px;
-
 }
 
 .scan_container-absolute {
@@ -83,7 +81,7 @@
 }
 
 .button_next {
-    display: flex
+    display: flex;
 }
 
 .button_next-enable {
@@ -109,12 +107,50 @@
 .none {
     display: none;
 }
-.cedula_posterior-hidden{
+.cedula_posterior-hidden {
     width: fit-content;
     padding: 0 20px;
 }
 
-@media(max-width:768px) {
+.container {
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background: #ffffffdb;
+}
+
+.spinner {
+    color: rgb(229, 231, 235);
+    height: 50px;
+    width: 50px;
+    fill: #1c64f2;
+}
+
+.animation-spin {
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@media (max-width: 768px) {
     .andes_img img {
         width: 200px;
     }
@@ -124,7 +160,7 @@
     }
 }
 
-@media(max-width:425px) {
+@media (max-width: 425px) {
     body .video {
         height: 100vh;
         width: auto;
@@ -149,16 +185,16 @@
     .buttons_container {
         justify-content: flex-end;
     }
-   
+
     /* .cedula_posterior-hidden img {
         transform: rotate(270deg);
     } */
-    .cedula_posterior-hidden{
+    .cedula_posterior-hidden {
         width: fit-content;
         padding: 0 20px;
     }
 }
-@media(max-width:320px) {
+@media (max-width: 320px) {
     .scan {
         overflow-x: hidden;
     }

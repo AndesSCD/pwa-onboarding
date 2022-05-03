@@ -18,6 +18,9 @@ function Camera(props) {
     if (props.direction !== 'FRENTE') {
         credencial = trasera;
     }
+    const constraints = {
+        advanced: [{ focusMode: 'manual', focusDistance: 0.33 }],
+    };
     React.useEffect(() => {
         let initial = 0;
         const takePicture = () => {
@@ -142,6 +145,9 @@ function Camera(props) {
                         video: {
                             // Justo aquí indicamos cuál dispositivo usar
                             deviceId: idDeDispositivo,
+                            width: { min: 1200, ideal: 1280, max: 1920 },
+                            height: { min: 800, ideal: 800, max: 1080 },
+                            focusMode: true,
                         },
                     },
 
@@ -168,6 +174,20 @@ function Camera(props) {
 
                         // Mandamos el stream de la cámara al elemento de vídeo
                         $video.srcObject = stream;
+
+                        let track = stream.getVideoTracks()[0];
+
+                        track
+                            .applyConstraints({
+                                advanced: [
+                                    {
+                                        width: $video.videoHeight,
+                                        height: $video.videoWidth,
+                                    },
+                                    { focusMode: true },
+                                ],
+                            })
+                            .then(() => {});
                         $video.play();
 
                         //Escuchar el click del botón para tomar la foto
@@ -232,7 +252,13 @@ function Camera(props) {
                 </figure>
             </div>
             <article className="camera_open-relative">
-                <video muted="muted" id="video" className="video"></video>
+                <video
+                    muted="muted"
+                    id="video"
+                    className="video"
+                    width="1200px"
+                    height="800px"
+                ></video>
                 <div className="camera_open-absolute">
                     <div>
                         <h3>

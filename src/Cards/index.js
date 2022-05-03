@@ -4,6 +4,7 @@ import { Trasera } from '../Trasera';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
+import { Loader } from '../Loader/Loader';
 
 function Cards({
     setUseCamera,
@@ -17,6 +18,7 @@ function Cards({
     uploadImageOne,
 }) {
     let { id } = useParams();
+    let [loader, setLoader] = React.useState(false);
 
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
@@ -34,6 +36,7 @@ function Cards({
         return new File([u8arr], filename, { type: mime });
     }
     async function sendData() {
+        setLoader(true);
         let imagen1 = document.getElementById('captura1').src;
         let imagen2 = document.getElementById('captura2').src;
         let convert1 = dataURLtoFile(imagen1, 'image_front.png');
@@ -57,9 +60,7 @@ function Cards({
                     confirmButtonText: 'Continuar en la plataforma web',
                     confirmButtonColor: '#004777',
                 }).then(() => {
-                    window.location.replace(
-                        'https://onboarding.andesscd.com.co/'
-                    );
+                    window.location.replace('https://www.andesscd.com.co/');
                 })
             )
             .catch((err) => {
@@ -81,6 +82,7 @@ function Cards({
                 setImage={setImage}
                 isVisible={'visibility'}
             ></OpenCamera> */}
+            {loader && <Loader />}
             <section className="scan_container-relative">
                 <label htmlFor="captura1">Delantera</label>
                 <Delantera

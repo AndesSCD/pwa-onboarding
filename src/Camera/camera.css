@@ -92,6 +92,7 @@ body .buttons_container{
     justify-content: center;
     align-items: center;
 }
+
 @media (max-width:425px) {
     .video{
         height: 100vh;
