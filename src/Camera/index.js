@@ -6,6 +6,7 @@ import cedula from '../cedula.svg';
 import trasera from '../trasera.svg';
 import back from '../arrow_back_white_24dp.svg';
 import reverse from '../change_circle_white_24dp.svg';
+import Swal from 'sweetalert2';
 
 function Camera(props) {
     let useCamera = props.useCamera;
@@ -93,6 +94,7 @@ function Camera(props) {
                         });
 
                         // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+
                         if (dispositivosDeVideo.length > 0 && initial == 0) {
                             // Llenar el select
                             dispositivosDeVideo.forEach((dispositivo) => {
@@ -101,7 +103,6 @@ function Camera(props) {
                                 option.text = dispositivo.label;
                                 $listaDeDispositivos.appendChild(option);
                             });
-                            initial = 1;
                         }
                     });
             };
@@ -131,7 +132,7 @@ function Camera(props) {
 
                     // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                     // y le pasamos el id de dispositivo
-                    if (dispositivosDeVideo.length > 1) {
+                    if (dispositivosDeVideo.length === 2) {
                         // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
                         mostrarStream(dispositivosDeVideo[1].deviceId);
                     } else if (dispositivosDeVideo.length > 0) {
@@ -175,19 +176,6 @@ function Camera(props) {
                         // Mandamos el stream de la cámara al elemento de vídeo
                         $video.srcObject = stream;
 
-                        let track = stream.getVideoTracks()[0];
-
-                        track
-                            .applyConstraints({
-                                advanced: [
-                                    {
-                                        width: $video.videoHeight,
-                                        height: $video.videoWidth,
-                                    },
-                                    { focusMode: true },
-                                ],
-                            })
-                            .then(() => {});
                         $video.play();
 
                         //Escuchar el click del botón para tomar la foto
