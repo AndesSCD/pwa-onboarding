@@ -19,9 +19,6 @@ function Camera(props) {
     if (props.direction !== 'FRENTE') {
         credencial = trasera;
     }
-    const constraints = {
-        advanced: [{ focusMode: 'manual', focusDistance: 0.33 }],
-    };
     React.useEffect(() => {
         let initial = 0;
         const takePicture = () => {
@@ -69,7 +66,6 @@ function Camera(props) {
                     navigator.msGetUserMedia
                 ).apply(navigator, arguments);
             }
-
             // Declaramos elementos del DOM
             const $video = document.querySelector('#video'),
                 $canvas = document.querySelector('#canvas'),
@@ -94,7 +90,6 @@ function Camera(props) {
                         });
 
                         // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
-
                         if (dispositivosDeVideo.length > 0 && initial == 0) {
                             // Llenar el select
                             dispositivosDeVideo.forEach((dispositivo) => {
@@ -103,6 +98,7 @@ function Camera(props) {
                                 option.text = dispositivo.label;
                                 $listaDeDispositivos.appendChild(option);
                             });
+                            initial = 1;
                         }
                     });
             };
@@ -132,14 +128,13 @@ function Camera(props) {
 
                     // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
                     // y le pasamos el id de dispositivo
-                    if (dispositivosDeVideo.length === 2) {
-                        // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
-                        mostrarStream(dispositivosDeVideo[1].deviceId);
-                    } else if (dispositivosDeVideo.length > 0) {
-                        mostrarStream(dispositivosDeVideo[0].deviceId);
-                    }
+                    let totalCamaras = dispositivosDeVideo.length;
+                    mostrarStream(
+                        dispositivosDeVideo[totalCamaras - 1].deviceId
+                    );
                 });
 
+            llenarSelectConDispositivosDisponibles();
             const mostrarStream = (idDeDispositivo) => {
                 _getUserMedia(
                     {
@@ -155,7 +150,7 @@ function Camera(props) {
                     function (streamObtenido) {
                         // Aquí ya tenemos permisos, ahora sí llenamos el select,
                         // pues si no, no nos daría el nombre de los dispositivos
-                        llenarSelectConDispositivosDisponibles();
+
                         // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
 
                         $listaDeDispositivos.onchange = () => {
@@ -175,7 +170,6 @@ function Camera(props) {
 
                         // Mandamos el stream de la cámara al elemento de vídeo
                         $video.srcObject = stream;
-
                         $video.play();
 
                         //Escuchar el click del botón para tomar la foto
@@ -219,7 +213,7 @@ function Camera(props) {
                         });
                     },
                     function (error) {
-                        console.log('Permiso denegado o error: ', error);
+                        alert('Permiso denegado o error: ', error);
                     }
                 );
             };
