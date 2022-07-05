@@ -152,7 +152,7 @@ function Camera(props) {
                             {props.direction} de tu {props.identification}
                         </h3>
                         <figure>
-                            <img src={credencial} alt="" />
+                            {/* <img src={credencial} alt="" /> */}
                         </figure>
                         <p>
                             Ubica el {props.direction} de tu{' '}
